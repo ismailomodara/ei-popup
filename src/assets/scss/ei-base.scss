@@ -1,10 +1,11 @@
 /* color palette from <https://github.com/vuejs/theme> */
 :root {
   --brand-white: #ffffff;
-  --brand-primary: #3423A6;
+  --brand-primary: #3066e4;
+  --brand-primary-50: #3066e450;
 
-  --background-primary: #f0eefb;
-  --background-secondary: #f0eefb80;
+  --background-primary: #f2f6fe;
+  --background-secondary: #f9fbfe;
 
   --text-primary: #111111;
   --text-secondary: #454545;
@@ -14,10 +15,10 @@
   --danger: #c34444;
   --success: #4dcd84;
 
-  --tab-height: 100px;
-  --tab-padding: 30px;
+  --tab-height: 80px;
+  --tab-padding: 20px;
 
-  --sidenav-width: 300px;
+  --sidenav-width: 250px;
 
   --border-color: var(--text-quartenary);
 

@@ -2,9 +2,10 @@
   <div class="ei-app-layout">
     <aside class="ei-app-layout--sidenav">
       <div class="ei-app-layout--sidenav__logo">
-        <h3>EiPopups</h3>
+        <h3>Ei</h3>
       </div>
       <ul class="ei-app-layout--sidenav__menu">
+
         <li
           v-for="item in menu"
           :key="item.name"
@@ -37,9 +38,9 @@ export default defineComponent({
         },
         {
           name: 'popups',
-          label: 'Popup Forms',
+          label: 'Popups',
           route: 'app.popups',
-          icon: 'code'
+          icon: 'file'
         }
       ]
     }
@@ -62,11 +63,10 @@ export default defineComponent({
   height: 100vh;
   width: 100%;
   background: var(--brand-white);
-  display: grid;
-  grid-template-columns: var(--sidenav-width) calc(100% - 300px);
+  display: flex;
 
   &--sidenav {
-    width: 100%;
+    width: var(--sidenav-width);
     height: 100%;
     position: relative;
 
@@ -82,7 +82,7 @@ export default defineComponent({
     &__menu {
       list-style-type: none;
       margin: 0;
-      padding: var(--tab-padding);
+			padding: 15px;
       display: grid;
       grid-template-columns: 1fr;
       grid-row-gap: 10px;
@@ -111,6 +111,8 @@ export default defineComponent({
 
         .label {
           color: var(--text-primary);
+					font-weight: 500;
+					font-size: 14px;
         }
 
         &.active {
@@ -136,7 +138,11 @@ export default defineComponent({
 
   &--body {
     background: var(--background-primary);
+		width:  calc(100% - var(--sidenav-width));
     height: 100%;
+		padding: 0 40px;
+		position: relative;
+		overflow: hidden;
   }
 }
 </style>

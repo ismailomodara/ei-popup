@@ -1,0 +1,54 @@
+
+// Colors
+$--colors: (
+    "primary": (
+        "base": #141414,
+    ),
+    "success": (
+        "base": #21ba45,
+    ),
+    "warning": (
+        "base": #f2711c,
+    ),
+    "danger": (
+        "base": #db2828,
+    ),
+    "error": (
+        "base": #db2828,
+    ),
+    "info": (
+        "base": #42b8dd,
+    ),
+);
+
+$--component-size: (
+    'large': 48px,
+    'default': 40px,
+    'small': 32px,
+);
+
+$--border-radius: (
+    'base': 6px,
+    'small': 4px,
+    'round': 20px,
+    'circle': 100%,
+);
+
+// we can add this to custom namespace, default is 'el'
+@forward "../../../node_modules/element-plus/theme-chalk/src/mixins/config" with (
+  $namespace: "el"
+);
+
+// You should use them in scss, because we calculate it by sass.
+// comment next lines to use default color
+
+@forward "../../../node_modules/element-plus/theme-chalk/src/common/var" with (
+  // do not use same name, it will override.
+  $colors: $--colors,
+  $common-component-size: $--component-size,
+  $border-radius: $--border-radius,
+  $button-padding-horizontal: ("default": 8px)
+);
+
+// ElementPlus Style
+@use "../../../node_modules/element-plus/theme-chalk/src/index" as *;
