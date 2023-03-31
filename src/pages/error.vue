@@ -6,6 +6,6 @@ export default {
 
 <template>
   <main>
-    <h1>Sushi</h1>
+    <h1>Error404</h1>
   </main>
 </template>

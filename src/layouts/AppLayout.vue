@@ -32,13 +32,13 @@ export default defineComponent({
         {
           name: 'dashboard',
           label: 'Dashboard',
-          route: 'dashboard',
+          route: 'app.dashboard',
           icon: 'grid'
         },
         {
           name: 'popups',
           label: 'Popup Forms',
-          route: 'popup-forms',
+          route: 'app.popups',
           icon: 'code'
         }
       ]
@@ -46,7 +46,7 @@ export default defineComponent({
   },
   computed: {
     activeMenu() {
-      return this.$route.name
+      return this.$route.name.split(".")[1]
     }
   },
   methods: {
