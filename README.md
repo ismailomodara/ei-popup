@@ -2,7 +2,7 @@
 
 This web application allows users to create and customize popups that are easily embeddable on any website.
 
-![alt text](https://github.com/ismailomodara/ei-popup/blob/master/unfurl.jpg?raw=true)
+![alt text](public/unfurl.png)
 
 ## Project Folder Structure
 The project consists of two main folders as common to project built with Vue, `public` and `src` folders.
