@@ -1,7 +1,7 @@
 <template>
   <div class="popups">
     <div v-if='popups.length === 0' class='popups-empty'>
-      <img src='../../../../empty.svg' alt='Empty' />
+      <img src='@/assets/images/empty.svg' alt='Empty' />
       <h2>No popups created.</h2>
     </div>
     <el-row v-else type='flex' :gutter='30'>

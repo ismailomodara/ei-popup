@@ -1,6 +1,6 @@
 <template>
   <div class='app-empty-page'>
-    <img src='../../../building.svg' alt='Building' />
+    <img src='@/assets/images/building.svg' alt='Building' />
     <h1>Building!</h1>
   </div>
 </template>

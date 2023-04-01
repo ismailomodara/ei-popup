@@ -129,7 +129,7 @@
       </template>
 
       <div v-else class="empty">
-        <img src='../../../../public/empty.svg' alt="Empty" />
+        <img src='../../../assets/images/empty.svg' alt="Empty" />
         <p>No selected element</p>
       </div>
     </section>

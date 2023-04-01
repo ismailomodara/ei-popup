@@ -9,7 +9,7 @@
         <el-button size='large' @click='$router.push({ name: "app.popups" })'>Let's begin</el-button>
       </div>
       <div class='ei-home--content-image'>
-        <img src='../../popup-illustration.svg' alt='Popup' />
+        <img src='@/assets/images/popup-illustration.svg' alt='Popup' />
       </div>
     </div>
   </div>
