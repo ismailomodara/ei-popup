@@ -7,7 +7,7 @@ import AppIndex from '@/pages/app-index.vue'
 
 import AppDashboard from "@/pages/app/dashboard.vue"
 
-import AppPopups from "@/pages/app/dashboard.vue"
+import AppPopups from "@/pages/app/popups/index.vue"
 
 import AppPopupCreate from "@/pages/app/popups/create.vue"
 
