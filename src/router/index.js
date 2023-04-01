@@ -1,15 +1,21 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const AppError = () => import("@/pages/app-error.vue");
-const AppIndex = () => import("@/pages/app-index.vue");
 
-const AppDashboard = () => import("@/pages/app/dashboard.vue");
-const AppPopups = () => import("@/pages/app/popups/index.vue");
-const AppPopupCreate = () => import("@/pages/app/popups/create.vue");
-const AppPopupEdit = () => import("@/pages/app/popups/edit.vue");
+import AppError from '@/pages/app-error.vue'
 
-const AppAnalytics = () => import("@/pages/app/analytics.vue");
-const AppSettings = () => import("@/pages/app/settings.vue");
+import AppIndex from '@/pages/app-index.vue'
+
+import AppDashboard from "@/pages/app/dashboard.vue"
+
+import AppPopups from "@/pages/app/dashboard.vue"
+
+import AppPopupCreate from "@/pages/app/popups/create.vue"
+
+import AppPopupEdit from "@/pages/app/popups/edit.vue"
+
+import AppAnalytics from "@/pages/app/analytics.vue"
+
+import AppSettings from "@/pages/app/settings.vue"
 
 
 const router = createRouter({
