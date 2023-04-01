@@ -11,6 +11,7 @@ const heading = {
     styles: {
       color: "#ffffff",
       textAlign: "center",
+      fontWeight: "bolder",
       fontSize: 20,
       lineHeight: 1.4
     }

@@ -59,9 +59,13 @@ export default {
     save () {
       this.saving = true;
       this.action === 'create' ? this.store.createPopup() : this.store.updatePopup()
-
+      const messages = {
+        create: "Popup created successfully",
+        edit: "Popup updated successfully",
+      }
       setTimeout(() => {
         this.$router.push({ name: "app.popups" })
+        this.$message.success(messages[this.action])
         this.saving = false;
       }, 1500)
     }
