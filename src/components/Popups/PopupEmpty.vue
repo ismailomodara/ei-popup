@@ -1,6 +1,6 @@
 <template>
   <div class='popups-empty'>
-    <img src='@/assets/images/empty.svg' alt='Empty' />
+    <img src='@/assets/images/empty.svg' alt='Empty' class='animate__animated animate__swing' />
     <h2>No popups created.</h2>
   </div>
 </template>
