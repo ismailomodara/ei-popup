@@ -31,6 +31,7 @@
 import draggable from "vuedraggable";
 import elements from "@/components/Popups/Popup/popup-elements";
 import AppSectionHeading from '@/components/App/AppSectionHeading.vue'
+import { useAppStore } from '@/store'
 
 export default {
 	name: "PopupPanelElements",
@@ -53,7 +54,7 @@ export default {
 		},
 		add(element) {
 			const elementParsed = this.clone(element)
-			this.$emit("add", elementParsed)
+      useAppStore().addElement(elementParsed)
 		}
 	}
 
