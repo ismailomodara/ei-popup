@@ -63,6 +63,5 @@ h1 {
 	outline: none;
 	box-shadow: none;
 	border: none;
-	color: #111111;
 }
 </style>

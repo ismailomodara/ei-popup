@@ -20,10 +20,6 @@ export default defineComponent({
 			type: Boolean,
 			default: false
 		},
-		label: {
-			type: String,
-			default: ""
-		},
 		value: {
 			type: String,
 			default: ""

@@ -37,12 +37,4 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
-.page-heading {
-  width: 100%;
-  padding-top: calc(var(--tab-height) - var(--tab-padding));
-  display: grid;
-  align-content: flex-start;
-  margin-bottom: 40px;
-}
-</style>
+<style scoped lang="scss"></style>

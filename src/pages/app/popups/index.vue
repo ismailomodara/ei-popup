@@ -1,10 +1,6 @@
 <template>
   <div class="popups">
-    <div v-if='popups.length === 0' class='popups-empty'>
-      <img src='@/assets/images/empty.svg' alt='Empty' />
-      <h2>No popups created.</h2>
-    </div>
-    <el-row v-else type='flex' :gutter='30'>
+    <el-row v-if='popups.length' type='flex' :gutter='30'>
       <el-col v-for="popup in popups" :key="popup.id" v :sm='12' :md='8'>
         <div class='popup'>
           <div>
@@ -35,6 +31,7 @@
         </div>
       </el-col>
     </el-row>
+    <popups-empty v-else />
     <div class='popups-create'>
       <el-button type='primary' size='large' @click='create'>Create New Popup</el-button>
     </div>
@@ -43,9 +40,13 @@
 
 <script>
 import { useAppStore } from '@/store'
+import PopupsEmpty from "@/components/Popups/PopupEmpty.vue";
 
 export default {
   name: "AppPopups",
+  components: {
+    PopupsEmpty
+  },
   computed: {
     store() {
       return useAppStore()
@@ -89,23 +90,6 @@ export default {
 
     p {
       color: var(--text-tertiary);
-    }
-  }
-
-  &-empty {
-    height: 400px;
-    width: 80%;
-    margin: auto;
-    background-color: var(--app-white);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    img {
-      height: 120px;
-      width: auto;
-      margin-bottom: 20px;
     }
   }
 

@@ -111,4 +111,18 @@ export default {
     color: #ffffff !important;
   }
 }
+
+.popup-element.sortable-chosen.ghost {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0;
+  border: 1px dashed var(--app-primary);
+  background-color: var(--app-primary-50) !important;
+  color: #ffffff;
+
+  i {
+    color: #ffffff;
+  }
+}
 </style>

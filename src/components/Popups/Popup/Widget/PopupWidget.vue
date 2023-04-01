@@ -16,8 +16,8 @@
       v-model="elements"
       v-bind="dragOptions"
       handle=".handle"
-      chosen-class="chosen"
       item-key="order"
+      ghost-class="ghost"
       @click.self="editElement(null)"
       @change="editAddedElement"
     >
@@ -260,10 +260,6 @@ export default {
 
 .ghost {
   background-color: var(--app-primary-50);
-}
-
-.sortable-chosen {
-  background-color: #ffffff !important;
 }
 
 @media (screen and max-width: 600px) {

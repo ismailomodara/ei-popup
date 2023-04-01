@@ -1,12 +1,12 @@
 <template>
   <div class="ei-home">
     <nav class='ei-home--nav'>
-      <router-link to='/'>EiPopups</router-link>
+      <p @click='home'>EiPopups</p>
     </nav>
     <div class='ei-home--content'>
       <div class='ei-home--content-text'>
         <h1>Convert visitors to leads in seconds</h1>
-        <el-button size='large' @click='$router.push({ name: "app.popups" })'>Let's begin</el-button>
+        <el-button size='large' @click="start">Let's begin</el-button>
       </div>
       <div class='ei-home--content-image'>
         <img src='@/assets/images/popup-illustration.svg' alt='Popup' />
@@ -15,7 +15,17 @@
   </div>
 </template>
 
-<script></script>
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+const home = () => {
+  router.push({ name: "home" })
+}
+const start = () => {
+  router.push({ name: "app.popups" })
+}
+</script>
 
 <style lang="scss" scoped>
 .ei-home {
@@ -40,7 +50,7 @@
     padding: 30px 0;
     width: 100%;
 
-    a {
+    p {
       color: #ffffff;
       text-decoration: none;
       font-size: 24px;

@@ -95,12 +95,4 @@ export default {
     padding: 30px 60px;
   }
 }
-
-.ghost {
-	background-color: var(--app-primary-50);
-}
-
-.sortable-chosen {
-  background-color: #ffffff !important;
-}
 </style>
