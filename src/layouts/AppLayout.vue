@@ -2,21 +2,22 @@
   <div class="ei-app-layout">
     <aside class="ei-app-layout--sidenav">
       <div class="ei-app-layout--sidenav__logo">
-        <h3>Ei</h3>
+        <h3>E</h3>
       </div>
       <ul class="ei-app-layout--sidenav__menu">
-
         <li
-          v-for="item in menu"
-          :key="item.name"
-          :class="{ active: activeMenu === item.name }"
-          @click="route(item.route)">
-          <span class="icon"><i :class="`ei-icon--${item.icon}`" /></span>
-          <span class="label">{{ item.label }}</span>
+          v-for="page in pages"
+          :key="page.name"
+          :class="{ active: currentPage === page.name }"
+          @click="route(page.route)">
+          <span class="icon"><i :class="`ei-icon--${page.icon}`" /></span>
         </li>
       </ul>
     </aside>
     <div class="ei-app-layout--body">
+      <div class='ei-app-layout--body__heading'>
+        <h2>{{ currentPageName }}</h2>
+      </div>
       <slot />
     </div>
   </div>
@@ -29,26 +30,42 @@ export default defineComponent({
   name: "AppLayout",
   data() {
     return {
-      menu: [
+      pages: [
         {
           name: 'dashboard',
           label: 'Dashboard',
           route: 'app.dashboard',
-          icon: 'grid'
+          icon: 'home'
         },
         {
           name: 'popups',
           label: 'Popups',
           route: 'app.popups',
           icon: 'file'
+        },
+        {
+          name: 'analytics',
+          label: 'Analytics',
+          route: 'app.analytics',
+          icon: 'bar-chart'
+        },
+        {
+          name: 'settings',
+          label: 'Settings',
+          route: 'app.settings',
+          icon: 'settings'
         }
       ]
     }
   },
   computed: {
-    activeMenu() {
+    currentPage() {
       return this.$route.name.split(".")[1]
+    },
+    currentPageName() {
+      return this.$route.meta.title || "App"
     }
+
   },
   methods: {
     route(route) {
@@ -62,7 +79,7 @@ export default defineComponent({
 .ei-app-layout {
   height: 100vh;
   width: 100%;
-  background: var(--brand-white);
+  background: var(--app-white);
   display: flex;
 
   &--sidenav {
@@ -81,17 +98,14 @@ export default defineComponent({
 
     &__menu {
       list-style-type: none;
-      margin: 0;
 			padding: 15px;
       display: grid;
       grid-template-columns: 1fr;
-      grid-row-gap: 10px;
 
       li {
-        padding: 15px;
+        padding: 12px 15px;
         display: grid;
         grid-template-columns: 24px auto;
-        grid-column-gap: 15px;
         cursor: pointer;
         border-radius: 8px;
         background-color: transparent;
@@ -112,23 +126,24 @@ export default defineComponent({
         .label {
           color: var(--text-primary);
 					font-weight: 500;
-					font-size: 14px;
+					font-size: 13px;
+          line-height: 1.8;
         }
 
         &.active {
-          background-color: var(--brand-primary);
+          background-color: var(--app-primary);
           transition: background-color 0.2s ease-in;
 
           .icon {
             opacity: 1;
 
             i {
-              color: var(--brand-white);
+              color: var(--app-white);
             }
           }
 
           .label {
-            color: var(--brand-white) !important;
+            color: var(--app-white) !important;
             transition: color 0.2s ease-in;
           }
         }
@@ -140,9 +155,22 @@ export default defineComponent({
     background: var(--background-primary);
 		width:  calc(100% - var(--sidenav-width));
     height: 100%;
-		padding: 0 40px;
 		position: relative;
 		overflow: hidden;
+
+    &__heading {
+      height: var(--tab-height);
+      background-color: var(--app-white);
+      border-bottom: 1px solid var(--border-color);
+      border-left: 1px solid var(--border-color);
+      display: grid;
+      align-content: center;
+      padding: 0 40px;
+
+      > * {
+        color: var(--app-primary);
+      }
+    }
   }
 }
 </style>

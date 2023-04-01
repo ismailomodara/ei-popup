@@ -1,11 +1,10 @@
 <template>
-	<component
+	<h1
 		ref="heading"
-		:is="settings.basic.type"
 		:contenteditable="editing"
 		:class="{ editing : editing }"
 		:style="setStyle"
-	>{{ setValue }}</component>
+	>{{ setValue }}</h1>
 </template>
 
 <script>
@@ -60,7 +59,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-h1, h2, h3, h4, h5, h6 {
+h1 {
 	outline: none;
 	box-shadow: none;
 	border: none;

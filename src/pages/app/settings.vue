@@ -6,7 +6,7 @@
 import AppEmptyPage from '@/components/App/AppEmptyPage.vue'
 
 export default {
-  name: "AppDashboard",
+  name: "AppSettings",
   components: { AppEmptyPage }
 }
 </script>

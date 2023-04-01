@@ -7,9 +7,7 @@ const heading = {
   value: "Enter text",
   icon: "ei-icon--type",
   settings: {
-    basic: {
-      type: "h2"
-    },
+    basic: {},
     styles: {
       color: "#ffffff",
       textAlign: "center",
@@ -29,9 +27,7 @@ const text = {
   value: "Enter text",
   icon: "ei-icon--type",
   settings: {
-    basic: {
-      type: "p"
-    },
+    basic: {},
     styles: {
       color: "#ffffff",
       textAlign: "center",
@@ -51,17 +47,17 @@ const input = {
   label: "Input",
   value: "",
   placeholder: "Enter value",
-  icon: "ei-icon--type",
+  icon: "ei-icon--file",
   settings: {
     basic: {
       label: false,
-      labelText: "Your email",
-      placeholder: "E-mail"
+      labelText: "Email",
+      placeholder: "Enter email"
     },
     styles: {
       height: 36,
       background: true,
-      backgroundColor: "#fffff",
+      backgroundColor: "#ffffff",
       borderRadius: 8,
       color: "#000000",
       textAlign: "left",
@@ -78,7 +74,7 @@ const button = {
   name: 'Button',
   component: 'popup-element-button',
   value: "Submit",
-  icon: "ei-icon--type",
+  icon: "ei-icon--crosshair",
   settings: {
     basic: {
       label: false,
@@ -111,13 +107,19 @@ const image = {
       alt: ""
     },
     styles: {
-      height: 36,
+      height: 48,
       objectFit: "contain"
     }
   }
 }
 
 export const defaultPopupElements = [
+  {
+    ...image,
+    id: image.id + '-' + new Date().getTime(),
+    value: "../../popup-stars.svg",
+    required: true
+  },
   {
     ...heading,
     id: heading.id + '-' + new Date().getTime(),

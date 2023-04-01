@@ -1,6 +1,9 @@
 <template>
 	<div class="popup-elements">
-		<h5>Add Element</h5>
+    <app-section-heading
+      title='Elements'
+      description='Double click or drag and drop elements to add to design.'
+    />
 		<draggable
 			class="popup-elements--list"
 			:list="elements"
@@ -9,13 +12,15 @@
 			:sort="false"
 			:item-key="'id'"
 			:drag-class="'popup-element-drag'"
-			:handle="'.popup-element-handle'"
+			:handle="'.handle'"
 		>
 			<template #item="{ element }">
 				<div
-					class="popup-element"
+					class="popup-element handle"
 					@dblclick="add(element)">
-					<span class="popup-element-handle"><i :class="element.icon" /></span>
+					<span class="popup-element-icon">
+            <i :class="element.icon" />
+          </span>
 					<p class="popup-element-label">{{ element.name }}</p>
 				</div>
 			</template>
@@ -25,10 +30,12 @@
 <script>
 import draggable from "vuedraggable";
 import elements from "@/components/Popups/Popup/popup-elements";
+import AppSectionHeading from '@/components/App/AppSectionHeading.vue'
 
 export default {
 	name: "PopupPanelElements",
 	components: {
+    AppSectionHeading,
 		draggable
 	},
 	data() {
@@ -56,51 +63,52 @@ export default {
 <style scoped lang="scss">
 .popup-elements {
 	width: 100%;
-	height: 100%;
-	background-color: var(--brand-white);
-	padding: 30px;
-	border-left: 1px solid var(--border-color);
-	border-right: 1px solid var(--border-color);
-	overflow-y: scroll;
+	background-color: var(--app-white);
+  margin-bottom: 40px;
 
 	&--list {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		grid-gap: 20px;
+		grid-gap: 10px;
 	}
 
 	.popup-element {
 		cursor: move;
 		display: grid;
-		justify-items: center;
+    grid-template-columns: 18px 1fr;
+    grid-column-gap: 10px;
+		justify-items: flex-start;
 		align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    margin-bottom: 5px;
+    background-color: #f3f4fc;
+    border-radius: 8px;
 
-		&-handle {
-			width: 100%;
-			height: 80px;
-			margin-bottom: 5px;
-			background-color: #f3f4fc;
-			border-radius: 8px;
+		&-icon {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+
+      i {
+        color: var(--text-primary)
+      }
 		}
 
 		&-label {
-			font-size: 15px;
+			font-size: 14px;
 			font-weight: 500;
-			color: #111111;
+			color: var(--text-secondary);
 		}
 	}
 }
 
 .popup-element-drag {
-	.popup-element-handle {
-		background: var(--brand-primary);
+  background-color: var(--app-primary) !important;
 
-		i {
-			color: #ffffff !important;
-		}
-	}
+  .popup-element-icon i,
+  .popup-element-label {
+    color: #ffffff !important;
+  }
 }
 </style>

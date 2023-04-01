@@ -1,11 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-const Error = () => import("@/pages/error.vue");
-const Index = () => import("@/pages/index.vue");
+const AppError = () => import("@/pages/app-error.vue");
+const AppIndex = () => import("@/pages/app-index.vue");
 
-const Dashboard = () => import("@/pages/app/dashboard.vue");
-const Popups = () => import("@/pages/app/popups/index.vue");
-const Popup = () => import("@/pages/app/popups/popup.vue");
+const AppDashboard = () => import("@/pages/app/dashboard.vue");
+const AppPopups = () => import("@/pages/app/popups/index.vue");
+const AppPopupCreate = () => import("@/pages/app/popups/create.vue");
+const AppPopupEdit = () => import("@/pages/app/popups/edit.vue");
+
+const AppAnalytics = () => import("@/pages/app/analytics.vue");
+const AppSettings = () => import("@/pages/app/settings.vue");
 
 
 const router = createRouter({
@@ -14,12 +18,12 @@ const router = createRouter({
     {
       path: "/:patchmatch(.*)*",
       name: "error",
-      component: Error,
+      component: AppError,
     },
     {
       path: '/',
       name: 'home',
-      component: Index
+      component: AppIndex
     },
     {
       path: '/app',
@@ -31,18 +35,51 @@ const router = createRouter({
         {
           path: 'dashboard',
           name: 'app.dashboard',
-          component: Dashboard
+          component: AppDashboard,
+          meta: {
+            title: "Dashboard"
+          }
         },
         {
           path: 'popups',
           name: 'app.popups',
-          component: Popups
+          component: AppPopups,
+          meta: {
+            title: "Popups"
+          }
+        },
+        {
+          path: 'popups/create',
+          name: 'app.popups.create',
+          component: AppPopupCreate,
+          meta: {
+            title: "Create Popup"
+          }
         },
         {
           path: 'popups/:id',
-          name: 'app.popups.popup',
-          component: Popup
-        }
+          name: 'app.popups.edit',
+          component: AppPopupEdit,
+          meta: {
+            title: "Edit Popup"
+          }
+        },
+        {
+          path: 'analytics',
+          name: 'app.analytics',
+          component: AppAnalytics,
+          meta: {
+            title: "Analytics"
+          }
+        },
+        {
+          path: 'settings',
+          name: 'app.settings',
+          component: AppSettings,
+          meta: {
+            title: "Settings"
+          }
+        },
       ]
     },
   ]

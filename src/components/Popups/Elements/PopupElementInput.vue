@@ -78,6 +78,7 @@ input {
 
   &::placeholder {
     font-weight: 400;
+    color: var(--text-quartenary)
   }
 }
 </style>

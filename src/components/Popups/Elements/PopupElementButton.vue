@@ -79,5 +79,6 @@ button {
 	padding: 15px 20px;
   background-color: #111111;
   color: #ffffff;
+  text-transform: uppercase;
 }
 </style>
