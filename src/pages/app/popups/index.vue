@@ -2,7 +2,7 @@
   <div class="popups">
     <el-row v-if='popups.length' type='flex' :gutter='30'>
       <el-col v-for="popup in popups" :key="popup.id" v :sm='12' :md='8'>
-        <div class='popup'>
+        <div class='popup animate__animated animate__fadeIn'>
           <div>
             <h4>{{ popup.title }}</h4>
             <p>{{ popup.id }}</p>
@@ -32,7 +32,7 @@
       </el-col>
     </el-row>
     <popups-empty v-else />
-    <div class='popups-create'>
+    <div class='popups-create animate__animated animate__fadeIn'>
       <el-button type='primary' size='large' @click='create'>Create New Popup</el-button>
     </div>
   </div>

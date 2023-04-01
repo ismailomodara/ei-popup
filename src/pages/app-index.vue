@@ -5,10 +5,10 @@
     </nav>
     <div class='ei-home--content'>
       <div class='ei-home--content-text'>
-        <h1>Convert visitors to leads in seconds</h1>
-        <el-button size='large' @click="start">Let's begin</el-button>
+        <h1 class='animate__animated animate__bounce'>Convert visitors to leads in seconds</h1>
+        <el-button class='animate__animated animate__fadeInUp' size='large' @click="start">Let's begin</el-button>
       </div>
-      <div class='ei-home--content-image'>
+      <div class='ei-home--content-image animate__animated animate__pulse'>
         <img src='@/assets/images/popup-illustration.svg' alt='Popup' />
       </div>
     </div>

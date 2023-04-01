@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="popup-design"
+		class="popup-design animate__animated animate__fadeIn"
 		@click.self="$refs.widget.editElement(null)">
     <div class='popup-design-widget'>
       <popup-widget ref="widget" :view="view" />

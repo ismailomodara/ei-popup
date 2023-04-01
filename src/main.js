@@ -16,6 +16,9 @@ import router from './router'
 // State
 import store from './store'
 
+// Animate
+import 'animate.css';
+
 const app = createApp(App)
 
 app.use(ElementPlus, { locale })

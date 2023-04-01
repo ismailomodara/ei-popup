@@ -56,7 +56,6 @@
 import draggable from "vuedraggable";
 import { defineAsyncComponent } from "vue";
 import { useAppStore } from "@/store";
-import { defaultPopupElements } from '@/components/Popups/Popup/popup-elements'
 
 export default {
   name: "PopupWidget",
@@ -127,12 +126,6 @@ export default {
     },
     removeElement(elementId) {
       this.store.removeElement(elementId)
-    },
-    save() {
-      this.store.createPopup();
-    },
-    update() {
-      this.store.updatePopup();
     }
   }
 };

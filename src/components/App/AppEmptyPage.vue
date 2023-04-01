@@ -1,7 +1,7 @@
 <template>
   <div class='app-empty-page'>
-    <img src='@/assets/images/building.svg' alt='Building' />
-    <h1>Building!</h1>
+    <img src='@/assets/images/building.svg' alt='Building' class='animate__animated animate__pulse' />
+    <h1 class='animate__animated animate__swing'>Building!</h1>
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 <template>
   <div class="popup">
     <div class='popup-panel'>
-      <popup-elements @add="addElement" />
-      <popup-settings />
+      <popup-elements class='animate__animated animate__fadeIn' @add="addElement" />
+      <popup-settings class='animate__animated animate__fadeIn' />
     </div>
     <div class='popup-window'>
       <popup-design ref="panel-design" />

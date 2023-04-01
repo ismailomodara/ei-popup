@@ -6,7 +6,9 @@
     :destroy-on-close="true"
     :close-on-click-modal="false"
   >
-    <popup-widget :preview='true' />
+    <div class='animate__animated animate__flipInX'>
+      <popup-widget :preview='true' />
+    </div>
   </el-dialog>
 </template>
 
