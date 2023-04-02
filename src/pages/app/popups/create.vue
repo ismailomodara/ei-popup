@@ -22,10 +22,10 @@ export default {
         spacing: 10,
         alignment: "center"
       },
-      elements: []
+      elements: {}
     };
     store.setPopup(popup)
-    store.setPopupElements([...defaultPopupElements])
+    store.setPopupElements(defaultPopupElements)
   }
 };
 </script>

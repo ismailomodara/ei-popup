@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="popupWidget"
     :class="['popup-widget', { preview: preview }]"
     :style='{
       backgroundColor: popup.settings.backgroundColor,
@@ -10,123 +11,85 @@
     }'
     @click.self="editElement(null)"
   >
-    <draggable
-      class="popup-widget-elements"
-      :style="{ justifyContent: popup.settings.alignment }"
-      v-model="elements"
-      v-bind="dragOptions"
-      handle=".handle"
-      item-key="id"
-      ghost-class="ghost"
-      @click.self="editElement(null)"
-      @change="editAddedElement"
-    >
-      <template #item="{ element }">
+    <template v-if='boundary'>
+      <popup-element
+        v-for="element in elements"
+        :key='element.id'
+        :element="element"
+        :boundary="boundary"
+      >
         <div
           :class="['popup-widget-element', { focused: editing === element.id }]"
-          :style="{
-              paddingTop: popup.settings.spacing + 'px',
-              paddingBottom: popup.settings.spacing + 'px',
-            }"
-          @click="editElement(element.id)">
-          <div class="popup-widget-element-actions">
-							<span class="handle">
-                <i class="ei-icon--move" />
-              </span>
-            <span
-              v-if='!element.required'
-              :class="['delete', { disabled: element.required }]"
-              @click='removeElement(element.id)'>
-                <i class="ei-icon--trash" />
-              </span>
-          </div>
+          @click="editElement(element.id)"
+          >
+          <span class='popup-widget-element-action' @click='removeElement(element.id)'>
+              <i class="ei-icon--trash" />
+            </span>
           <component
-            :is="element.component"
+            :is="components[element.component]"
             :editing="editing === element.id"
             :value="element.value"
             :settings='element.settings'
             :key="element.id"
             @update="element.value = $event"
+
           />
         </div>
-      </template>
-    </draggable>
+      </popup-element>
+    </template>
   </div>
 
 </template>
-<script>
-import draggable from "vuedraggable";
-import { defineAsyncComponent } from "vue";
+<script setup>
+import { useElementBounding } from '@vueuse/core';
+import { ref, computed } from "vue";
 import { useAppStore } from "@/store";
 
-export default {
-  name: "PopupWidget",
-  props: {
-    view: {
-      type: String,
-      default: "desktop"
-    },
-    preview: {
-      type: Boolean,
-      default: false
-    }
+defineProps(['view', 'preview']);
+
+import PopupElement from '@/components/Popups/Elements/PopupElement.vue';
+import PopupElementText from '@/components/Popups/Elements/PopupElementText.vue';
+import PopupElementHeading from '@/components/Popups/Elements/PopupElementHeading.vue';
+import PopupElementButton from '@/components/Popups/Elements/PopupElementButton.vue';
+import PopupElementInput from '@/components/Popups/Elements/PopupElementInput.vue';
+import PopupElementImage from '@/components/Popups/Elements/PopupElementImage.vue';
+
+const components = {
+  "popup-element-text": PopupElementText,
+  "popup-element-heading": PopupElementHeading,
+  "popup-element-button": PopupElementButton,
+  "popup-element-input": PopupElementInput,
+  "popup-element-image": PopupElementImage,
+}
+
+const popupWidget = ref();
+const { top, right, bottom, left } = useElementBounding(popupWidget);
+const boundary = { top, right, bottom, left }
+const views = ref({
+  desktop: "500px",
+  tablet: "400px",
+  mobile: "380px"
+})
+
+const store = useAppStore();
+const popup = store.popup;
+const editing = computed(() => store.editing)
+const elements = computed({
+  get() {
+    return store.popup.elements
   },
-  components: {
-    draggable,
-    PopupElementImage: defineAsyncComponent(() => import("@/components/Popups/Elements/PopupElementImage.vue")),
-    PopupElementHeading: defineAsyncComponent(() => import("@/components/Popups/Elements/PopupElementHeading.vue")),
-    PopupElementText: defineAsyncComponent(() => import("@/components/Popups/Elements/PopupElementText.vue")),
-    PopupElementInput: defineAsyncComponent(() => import("@/components/Popups/Elements/PopupElementInput.vue")),
-    PopupElementButton: defineAsyncComponent(() => import("@/components/Popups/Elements/PopupElementButton.vue")),
-  },
-  data() {
-    return {
-      views: {
-        desktop: "500px",
-        tablet: "400px",
-        mobile: "380px"
-      },
-      dragOptions: {
-        animation: 250,
-        group: "people",
-        disabled: false,
-        ghostClass: "ghost"
-      }
-    };
-  },
-  computed: {
-    store() {
-      return useAppStore()
-    },
-    popup() {
-      return this.store.popup
-    },
-    editing() {
-      return this.store.editing
-    },
-    elements: {
-      get() {
-        return this.store.popup.elements
-      },
-      set(elements) {
-        this.store.setPopupElements(elements)
-      }
-    }
-  },
-  methods: {
-    editAddedElement({ added }) {
-      if (added) {
-        this.store.setElementToEdit(added.element.id)
-      }
-    },
-    editElement(elementId) {
-      this.store.setElementToEdit(elementId)
-    },
-    removeElement(elementId) {
-      this.store.removeElement(elementId)
-    }
+  set(elements) {
+    store.setPopupElements(elements)
   }
-};
+})
+
+const editElement = (elementId) => {
+  store.setElementToEdit(elementId)
+}
+
+const removeElement = (elementId) => {
+  store.removeElement(elementId)
+}
 </script>
 
 <style scoped lang="scss">
@@ -139,9 +102,6 @@ export default {
   border-radius: 100%;
   position: relative;
   padding: 30px;
-  display: flex;
-  justify-items: center;
-  align-items: center;
 
   &:before {
     content: "";
@@ -154,23 +114,8 @@ export default {
     border-radius: 100%;
   }
 
-  &-elements {
-    height: 100%;
-    width: 100%;
-    display: -webkit-box;
-    display: flex;
-    -ms-flex-direction: column;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    justify-content: center;
-    padding: 40px;
-    margin-bottom: 0;
-    border-radius: 0.25rem;
-  }
-
   &-element {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid transparent;
     display: flex;
     align-items: center;
@@ -181,46 +126,30 @@ export default {
       width: 100%;
     }
 
-    &-actions {
+    &-action {
+      cursor: pointer;
       position: absolute;
       top: 0;
       right: 0;
       opacity: 0;
       z-index: 1;
+      height: 26px;
+      width: 26px;
+      background: #111111;
       display: flex;
+      justify-content: center;
+      align-items: center;
 
-      span {
-        height: 26px;
-        width: 26px;
-        background: #111111;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        i {
-          font-size: 14px;
-          color: #ffffff;
-        }
-      }
-
-      .handle {
-        cursor: move;
-      }
-
-      .delete {
-        cursor: pointer;
-
-        &.disabled {
-          cursor: not-allowed;
-          opacity: 0.74;
-        }
+      i {
+        font-size: 14px;
+        color: #ffffff;
       }
     }
 
     &.focused {
       border-color: #111111;
 
-      .popup-widget-element-actions {
+      .popup-widget-element-action {
         opacity: 1 !important;
       }
     }

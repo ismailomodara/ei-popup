@@ -2,33 +2,23 @@
 	<div class="popup-elements">
     <app-section-heading
       title='Elements'
-      description='Double click or drag and drop elements to add to design.'
+      description='Double click an element to add to design.'
     />
-		<draggable
-			class="popup-elements--list"
-			:list="elements"
-			:group="{ name: 'people', pull: 'clone', put: false }"
-			:clone="clone"
-			:sort="false"
-			:item-key="'id'"
-			:drag-class="'popup-element-drag'"
-			:handle="'.handle'"
-		>
-			<template #item="{ element }">
-				<div
-					class="popup-element handle"
-					@dblclick="add(element)">
+    <div class='popup-elements--list'>
+      <div
+        v-for="element in elements"
+        :key='element.id'
+        class="popup-element handle"
+        @dblclick="add(element)">
 					<span class="popup-element-icon">
             <i :class="element.icon" />
           </span>
-					<p class="popup-element-label">{{ element.name }}</p>
-				</div>
-			</template>
-		</draggable>
+        <p class="popup-element-label">{{ element.name }}</p>
+      </div>
+    </div>
 	</div>
 </template>
 <script>
-import draggable from 'vuedraggable'
 import { elements } from '@/components/Popups/Popup/popup-elements'
 import AppSectionHeading from '@/components/App/AppSectionHeading.vue'
 import { useAppStore } from '@/store'
@@ -36,8 +26,7 @@ import { useAppStore } from '@/store'
 export default {
 	name: "PopupElements",
 	components: {
-    AppSectionHeading,
-		draggable
+    AppSectionHeading
 	},
 	data() {
 		return {
@@ -45,15 +34,13 @@ export default {
 		};
 	},
 	methods: {
-		clone(element) {
-      return JSON.parse(JSON.stringify({
+		add(element) {
+      const parsedElement = JSON.parse(JSON.stringify({
         ...element,
         id: element.id + '-' + new Date().getTime()
-      }));
-		},
-		add(element) {
-			const elementParsed = this.clone(element)
-      useAppStore().addElement(elementParsed)
+      }))
+      useAppStore().addElement(parsedElement)
+      useAppStore().setElementToEdit(parsedElement.id)
 		}
 	}
 
@@ -73,7 +60,7 @@ export default {
 	}
 
 	.popup-element {
-		cursor: move;
+    cursor: pointer;
 		display: grid;
     grid-template-columns: 18px 1fr;
     grid-column-gap: 10px;

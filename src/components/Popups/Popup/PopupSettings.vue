@@ -145,16 +145,16 @@ export default {
   components: { PopupSettingsProperty, AppSectionHeading },
 	computed: {
 		store() {
-			return { ...useAppStore() }
+			return useAppStore()
 		},
     popupSettings() {
       return this.store.popup.settings;
     },
     popupElements() {
-      return this.store.editing && this.store.popup.elements;
+      return this.store.popup.elements;
     },
 		element() {
-			const element = this.popupElements && this.popupElements.find(element => element.id === this.store.editing)
+			const element = this.store.editing && this.popupElements[this.store.editing]
 			return element ? element : null
 		},
     elementType() {

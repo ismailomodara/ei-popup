@@ -1,7 +1,5 @@
 <template>
-	<div
-		class="popup-design animate__animated animate__fadeIn"
-		@click.self="$refs.widget.editElement(null)">
+	<div class="popup-design animate__animated animate__fadeIn">
     <div class='popup-design-widget'>
       <popup-widget ref="widget" :view="view" />
     </div>
@@ -20,17 +18,17 @@
         </el-radio-group>
       </div>
       <div class="popup-design-footer-action">
-        <el-button draggable='true' @click="preview = true">Preview</el-button>
+        <el-button @click="preview = true">Preview</el-button>
         <el-button type="primary" :loading='saving' @click="save">Save</el-button>
       </div>
     </div>
 	</div>
-  <popup-widget-preview v-model:show='preview' />
+  <popup-widget-preview v-model:show='preview' :preview='true' />
 </template>
 <script>
 import { useAppStore } from '@/store'
-import PopupWidget from '@/components/Popups/Popup/Widget/PopupWidget.vue'
-import PopupWidgetPreview from '@/components/Popups/Popup/Widget/PopupWidgetPreview.vue'
+import PopupWidget from '@/components/Popups/Popup/Widget/PopupWidget.vue';
+import PopupWidgetPreview from '@/components/Popups/Popup/Widget/PopupWidgetPreview.vue';
 
 export default {
   name: "PopupDesign",

@@ -1,9 +1,9 @@
 import { createPinia, defineStore } from 'pinia';
-const localStore = localStorage.getItem('ei-popups');
+const localStore = localStorage.getItem('ei-popups-new');
 
 export const useAppStore = defineStore('appstore', {
   state: () => ({
-    popups: localStore ? JSON.parse(localStore) : [],
+    popups: localStore ? JSON.parse(localStore) : {},
     popup: {
       id: null,
       title: "",
@@ -12,7 +12,7 @@ export const useAppStore = defineStore('appstore', {
         spacing: 10,
         alignment: "center"
       },
-      elements: []
+      elements: {}
     },
     editing: null
   }),
@@ -27,15 +27,19 @@ export const useAppStore = defineStore('appstore', {
       this.popup.elements = elements
     },
     addElement(element) {
-      let payload = {}
-      Object.assign(payload, element)
-      this.popup.elements.push(payload)
+      this.popup.elements[element.id] = { ...element }
     },
     removeElement(elementId) {
-      this.popup.elements = this.popup.elements.filter(element => element.id !== elementId)
+      delete this.popup.elements[elementId]
     },
-    setElementToEdit(id) {
-      this.editing = id
+    setElementToEdit(elementId) {
+      this.editing = elementId
+    },
+    setElementAxis(elementId, x, y) {
+      if (this.popup.elements[elementId]) {
+        this.popup.elements[elementId].x = x;
+        this.popup.elements[elementId].y = y;
+      }
     },
 
     /**
@@ -54,25 +58,22 @@ export const useAppStore = defineStore('appstore', {
         updated_at: new Date().getTime(),
       }
 
-      this.popups.push(payload)
-      localStorage.setItem('ei-popups', JSON.stringify(this.popups))
+      this.popups[payload.id] = { ...payload }
+      localStorage.setItem('ei-popups-new', JSON.stringify(this.popups))
     },
 
     updatePopup() {
-      const ids = this.popups.map(popup => popup.id);
-      const index = ids.indexOf(this.popup.id);
-
-      this.popups[index] = {
+      this.popups[this.popup.id] = {
         ...this.popup,
         updated_at: new Date().getTime(),
       }
 
-      localStorage.setItem('ei-popups', JSON.stringify(this.popups))
+      localStorage.setItem('ei-popups-new', JSON.stringify(this.popups))
     },
 
     deletePopup(popupId) {
-      this.popups = this.popups.filter(popup => popup.id !== popupId)
-      localStorage.setItem('ei-popups', JSON.stringify(this.popups))
+      delete this.popups[popupId]
+      localStorage.setItem('ei-popups-new', JSON.stringify(this.popups))
     }
   }
 })

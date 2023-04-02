@@ -1,4 +1,6 @@
 const heading = {
+  x: 20,
+  y: 20,
   required: false,
   type: ["text"],
   id: 'heading',
@@ -19,6 +21,8 @@ const heading = {
 }
 
 const text = {
+  x: 20,
+  y: 20,
   required: false,
   type: ["text"],
   id: 'text',
@@ -39,6 +43,8 @@ const text = {
 }
 
 const input = {
+  x: 20,
+  y: 20,
   required: false,
   type: ["text", "container", "input"],
   id: 'input',
@@ -66,6 +72,8 @@ const input = {
 }
 
 const button = {
+  x: 20,
+  y: 20,
   required: false,
   type: ["text", "container", "button"],
   id: 'button',
@@ -89,6 +97,8 @@ const button = {
 }
 
 const image = {
+  x: 20,
+  y: 20,
   required: false,
   type: ["image"],
   id: 'image',
@@ -107,42 +117,49 @@ const image = {
   }
 }
 
-export const defaultPopupElements = [
-  {
-    ...image,
-    id: image.id + '-' + new Date().getTime(),
-    value: "../../popup-stars.svg",
+const suffix = new Date().getTime();
+const textId = text.id + '-' + suffix
+const headingId = heading.id + '-' + suffix
+const inputId = input.id + '-' + suffix
+const buttonId = button.id + '-' + suffix
+const imageId = image.id + '-' + suffix
+
+export const defaultPopupElements = {
+  [textId]: {
+    ...text,
+    id: textId,
+    value: "No credit card required. No Surprises.",
     required: true
   },
-  {
+  [headingId]: {
     ...heading,
-    id: heading.id + '-' + new Date().getTime(),
+    id: headingId,
     value: "Get access to unlimited content from Ei-Popups.",
     required: true
   },
-  {
+  [inputId]: {
     ...input,
-    id: input.id + '-' + new Date().getTime(),
+    id: inputId,
     required: true
   },
-  {
+  [buttonId]: {
     ...button,
+    id: buttonId,
     value: "Signup Now",
-    id: button.id + '-' + new Date().getTime(),
     required: true
   },
-  {
-    ...text,
-    value: "No credit card required. No Surprises.",
-    id: text.id + '-' + new Date().getTime(),
+  [imageId]: {
+    ...image,
+    id: imageId,
+    value: "../../popup-stars.svg",
     required: true
-  },
-]
+  }
+}
 
-export const elements = [
+export const elements = {
   heading,
   text,
   button,
   image,
   input
-]
+}
