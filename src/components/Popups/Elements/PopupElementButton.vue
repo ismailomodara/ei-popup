@@ -2,7 +2,6 @@
 	<button
 		ref="button"
 		:contenteditable="editing"
-		:class="{ editing : editing }"
     :style="styles"
 		@keydown.prevent.space="allowSpace"
 	>{{ value }}</button>

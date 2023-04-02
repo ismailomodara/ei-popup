@@ -53,7 +53,7 @@
         <template v-if="elementType.includes('container')">
           <popup-settings-property title='Background color'>
             <template #label>
-              <el-switch v-model="styles.background" />
+              <el-switch v-if="elementType.includes('input')" v-model="styles.background" />
             </template>
             <template #control>
               <el-color-picker v-model="styles.backgroundColor" />
@@ -145,29 +145,26 @@ export default {
   components: { PopupSettingsProperty, AppSectionHeading },
 	computed: {
 		store() {
-			return useAppStore()
+			return { ...useAppStore() }
 		},
     popupSettings() {
       return this.store.popup.settings;
     },
     popupElements() {
-      return this.store.popup.elements;
+      return this.store.editing && this.store.popup.elements;
     },
 		element() {
-			const element = this.popupElements.find(element => element.id === this.store.editing)
+			const element = this.popupElements && this.popupElements.find(element => element.id === this.store.editing)
 			return element ? element : null
 		},
     elementType() {
       return this.element && this.element.type;
     },
-    elementSettings() {
-      return this.element && this.element.settings ? { ...this.element.settings } : null
-    },
     basic() {
-      return this.elementSettings ? this.elementSettings.basic : null
+      return this.element && this.element.settings ? this.element.settings.basic : null
     },
     styles() {
-      return this.elementSettings ? this.elementSettings.styles : null
+      return this.element && this.element.settings ? this.element.settings.styles : null
     }
 	}
 };

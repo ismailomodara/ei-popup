@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<label v-if="settings.basic.label">{{ settings.basic.labelText }}</label>
+		<label v-if="basic.label">{{ basic.labelText }}</label>
 		<input
       v-model="setValue"
-      :placeholder='settings.basic.placeholder'
       type="text"
+      :placeholder='basic.placeholder'
       :readonly='editing'
       :style="styles" />
 	</div>
@@ -43,6 +43,9 @@ export default defineComponent({
 				this.$emit("update", value)
 			}
 		},
+    basic() {
+      return this.settings.basic;
+    },
     styles() {
       const { fontSize, borderRadius } = this.settings.styles;
       return {

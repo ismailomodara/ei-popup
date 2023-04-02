@@ -20,7 +20,7 @@
         </el-radio-group>
       </div>
       <div class="popup-design-footer-action">
-        <el-button @click="preview = true">Preview</el-button>
+        <el-button draggable='true' @click="preview = true">Preview</el-button>
         <el-button type="primary" :loading='saving' @click="save">Save</el-button>
       </div>
     </div>

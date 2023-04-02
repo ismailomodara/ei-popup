@@ -13,7 +13,8 @@ export default {
     Popup
   },
   created() {
-    useAppStore().setPopup({
+    const store = useAppStore();
+    const popup = {
       id: null,
       title: "",
       settings: {
@@ -21,8 +22,10 @@ export default {
         spacing: 10,
         alignment: "center"
       },
-      elements: [...defaultPopupElements]
-    })
+      elements: []
+    };
+    store.setPopup(popup)
+    store.setPopupElements([...defaultPopupElements])
   }
 };
 </script>

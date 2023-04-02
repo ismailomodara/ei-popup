@@ -28,29 +28,28 @@
 	</div>
 </template>
 <script>
-import draggable from "vuedraggable";
-import elements from "@/components/Popups/Popup/popup-elements";
+import draggable from 'vuedraggable'
+import { elements } from '@/components/Popups/Popup/popup-elements'
 import AppSectionHeading from '@/components/App/AppSectionHeading.vue'
 import { useAppStore } from '@/store'
 
 export default {
-	name: "PopupPanelElements",
+	name: "PopupElements",
 	components: {
     AppSectionHeading,
 		draggable
 	},
 	data() {
 		return {
-			elements,
+      elements: JSON.parse(JSON.stringify(elements))
 		};
 	},
 	methods: {
 		clone(element) {
-			return {
-				...element,
-				id: element.id + '-' + new Date().getTime(),
-				name: element.name
-			};
+      return JSON.parse(JSON.stringify({
+        ...element,
+        id: element.id + '-' + new Date().getTime()
+      }));
 		},
 		add(element) {
 			const elementParsed = this.clone(element)

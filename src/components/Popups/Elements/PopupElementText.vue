@@ -2,8 +2,7 @@
   <p
 		ref="text"
 		:contenteditable="editing"
-		:class="{ editing : editing }"
-		:style="setStyle"
+		:style="styles"
 	>{{ setValue }}</p>
 </template>
 
@@ -40,7 +39,7 @@ export default defineComponent({
         this.$emit("update", value)
       }
     },
-		setStyle() {
+    styles() {
 			const { fontSize } = this.settings.styles;
 			return {
 				...this.settings.styles,
@@ -61,10 +60,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 p {
 	font-size: 16px;
-	font-weight: 500;
 	outline: none;
 	box-shadow: none;
 	border: none;
-	color: #111111;
+  width: 100%;
 }
 </style>

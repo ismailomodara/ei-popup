@@ -16,7 +16,7 @@
       v-model="elements"
       v-bind="dragOptions"
       handle=".handle"
-      item-key="order"
+      item-key="id"
       ghost-class="ghost"
       @click.self="editElement(null)"
       @change="editAddedElement"
@@ -41,9 +41,11 @@
               </span>
           </div>
           <component
-            v-bind="element"
             :is="element.component"
             :editing="editing === element.id"
+            :value="element.value"
+            :settings='element.settings'
+            :key="element.id"
             @update="element.value = $event"
           />
         </div>
@@ -107,15 +109,11 @@ export default {
         return this.store.popup.elements
       },
       set(elements) {
-        this.store.setElements(elements)
+        this.store.setPopupElements(elements)
       }
     }
   },
   methods: {
-    addElement(element) {
-      this.store.addElement(element)
-      this.editAddedElement({ added: {element} });
-    },
     editAddedElement({ added }) {
       if (added) {
         this.store.setElementToEdit(added.element.id)
@@ -175,7 +173,6 @@ export default {
     padding: 10px;
     border: 1px solid transparent;
     display: flex;
-    justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
@@ -252,7 +249,13 @@ export default {
 }
 
 .ghost {
+  opacity: 0.5;
   background-color: var(--app-primary-50);
+  border: 1px dashed var(--app-primary);
+
+  > * {
+    opacity: 0;
+  }
 }
 
 @media (screen and max-width: 600px) {

@@ -44,9 +44,7 @@ const input = {
   id: 'input',
   name: 'Input',
   component: 'popup-element-input',
-  label: "Input",
   value: "",
-  placeholder: "Enter value",
   icon: "ei-icon--file",
   settings: {
     basic: {
@@ -76,11 +74,7 @@ const button = {
   value: "Submit",
   icon: "ei-icon--crosshair",
   settings: {
-    basic: {
-      label: false,
-      labelText: "Email",
-      placeholder: "E-mail"
-    },
+    basic: {},
     styles: {
       padding: 15,
       background: true,
@@ -145,7 +139,7 @@ export const defaultPopupElements = [
   },
 ]
 
-export default [
+export const elements = [
   heading,
   text,
   button,

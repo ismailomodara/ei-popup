@@ -8,8 +8,8 @@
             <p>{{ popup.id }}</p>
           </div>
           <div>
-            <el-button type='primary' plain size='small' @click='view(popup.id)'>
-              View
+            <el-button type='primary' plain size='small' @click='edit(popup.id)'>
+              Edit
             </el-button>
             <el-popconfirm
               width="220"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { useAppStore } from '@/store'
+import { useAppStore } from '@/store';
 import PopupsEmpty from "@/components/Popups/PopupEmpty.vue";
 
 export default {
@@ -59,7 +59,7 @@ export default {
     create() {
       this.$router.push({ name: "app.popups.create"})
     },
-    view(popupId) {
+    edit(popupId) {
       const popup = this.popups.find(popup => popup.id === popupId)
       this.store.setPopup(popup)
       this.$router.push({ name: "app.popups.edit", params: { id: popupId }})

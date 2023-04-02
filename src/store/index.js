@@ -12,7 +12,7 @@ export const useAppStore = defineStore('appstore', {
         spacing: 10,
         alignment: "center"
       },
-      elements: [],
+      elements: []
     },
     editing: null
   }),
@@ -21,15 +21,15 @@ export const useAppStore = defineStore('appstore', {
      * Popup Elements CRUD
      */
     setPopup(popup) {
-      this.popup = {
-        ...popup
-      }
+      this.popup = popup
     },
-    setElements(elements) {
+    setPopupElements(elements) {
       this.popup.elements = elements
     },
     addElement(element) {
-      this.popup.elements.push(element)
+      let payload = {}
+      Object.assign(payload, element)
+      this.popup.elements.push(payload)
     },
     removeElement(elementId) {
       this.popup.elements = this.popup.elements.filter(element => element.id !== elementId)

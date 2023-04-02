@@ -2,8 +2,7 @@
 	<h1
 		ref="heading"
 		:contenteditable="editing"
-		:class="{ editing : editing }"
-		:style="setStyle"
+		:style="styles"
 	>{{ setValue }}</h1>
 </template>
 
@@ -40,7 +39,7 @@ export default defineComponent({
 				this.$emit("update", value)
 			}
 		},
-		setStyle() {
+		styles() {
 			const { fontSize } = this.settings.styles;
 			return {
 				...this.settings.styles,
@@ -63,5 +62,6 @@ h1 {
 	outline: none;
 	box-shadow: none;
 	border: none;
+  width: 100%;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="popup">
     <div class='popup-panel'>
-      <popup-elements class='animate__animated animate__fadeIn' @add="addElement" />
+      <popup-elements class='animate__animated animate__fadeIn' />
       <popup-settings class='animate__animated animate__fadeIn' />
     </div>
     <div class='popup-window'>
@@ -17,31 +17,11 @@ import PopupSettings from "@/components/Popups/Popup/PopupSettings.vue";
 
 export default {
   name: "AppPopup",
-  props: {
-    action: {
-      type: String,
-      default: "create"
-    }
-  },
   components: {
     PopupSettings,
     PopupElements,
     PopupDesign
-  },
-  data() {
-    return {}
-  },
-  computed: {
-    store() {
-      return this.store
-    }
-  },
-  methods: {
-    addElement(element) {
-      this.$refs['panel-design'].addElement(element)
-    }
   }
-
 };
 </script>
 
