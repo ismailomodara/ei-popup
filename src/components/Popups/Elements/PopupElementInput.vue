@@ -68,6 +68,7 @@ input {
   padding-left: 10px;
 	height: 40px;
 	width: 100%;
+  min-width: 300px;
 	background-color: #ffffff;
 	border-radius: 8px;
 	border: none;

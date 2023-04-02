@@ -20,9 +20,7 @@ export default {
     }
   },
   created() {
-    const popupId = this.$route.params.id;
-    const popup = this.popups.find(popup => popup.id === popupId)
-
+    const popup = this.popups[this.$route.params.id]
     if (popup) {
       this.store.setPopup(popup)
     } else {

@@ -1,6 +1,6 @@
 <template>
   <div class="popups">
-    <el-row v-if='popups.length' type='flex' :gutter='30'>
+    <el-row v-if='Object.keys(popups).length' type='flex' :gutter='30'>
       <el-col v-for="popup in popups" :key="popup.id" v :sm='12' :md='8'>
         <div class='popup animate__animated animate__fadeIn'>
           <div>
@@ -60,7 +60,7 @@ export default {
       this.$router.push({ name: "app.popups.create"})
     },
     edit(popupId) {
-      const popup = this.popups.find(popup => popup.id === popupId)
+      const popup = this.popups[popupId];
       this.store.setPopup(popup)
       this.$router.push({ name: "app.popups.edit", params: { id: popupId }})
     },
