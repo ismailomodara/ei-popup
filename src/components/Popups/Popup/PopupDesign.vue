@@ -1,5 +1,7 @@
 <template>
-	<div class="popup-design animate__animated animate__fadeIn">
+	<div
+    class="popup-design animate__animated animate__fadeIn"
+    @click.self="closeEdit">
     <div class='popup-design-widget'>
       <popup-widget ref="widget" :view="view" />
     </div>
@@ -23,12 +25,12 @@
       </div>
     </div>
 	</div>
-  <popup-widget-preview v-model:show='preview' :preview='true' />
+  <popup-widget-preview v-model:show='preview' />
 </template>
 <script>
-import { useAppStore } from '@/store'
 import PopupWidget from '@/components/Popups/Popup/Widget/PopupWidget.vue';
 import PopupWidgetPreview from '@/components/Popups/Popup/Widget/PopupWidgetPreview.vue';
+import { useAppStore } from '@/store'
 
 export default {
   name: "PopupDesign",
@@ -54,6 +56,9 @@ export default {
     }
   },
   methods: {
+    closeEdit() {
+      this.store.setElementToEdit(null)
+    },
     save () {
       this.saving = true;
       this.action === 'create' ? this.store.createPopup() : this.store.updatePopup()

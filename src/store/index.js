@@ -35,10 +35,10 @@ export const useAppStore = defineStore('appstore', {
     setElementToEdit(elementId) {
       this.editing = elementId
     },
-    setElementAxis(elementId, x, y) {
+    setElementAxis(elementId, offsetTop, offsetLeft) {
       if (this.popup.elements[elementId]) {
-        this.popup.elements[elementId].x = x;
-        this.popup.elements[elementId].y = y;
+        this.popup.elements[elementId].offsetTop = offsetTop;
+        this.popup.elements[elementId].offsetLeft = offsetLeft;
       }
     },
 

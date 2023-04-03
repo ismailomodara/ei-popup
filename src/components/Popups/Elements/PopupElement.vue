@@ -1,47 +1,101 @@
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
-import { useDraggable, useElementBounding, clamp } from '@vueuse/core';
+import { ref, watchEffect } from 'vue';
+import { useDraggable } from '@vueuse/core';
 import { useAppStore } from '@/store'
 
-
-
 const props = defineProps(['element', 'boundary'])
-const draggable = ref();
 
+const element = ref();
+const handle = ref();
+const outOfBound = ref(false);
 const store = useAppStore()
 
-const { width, height } = useElementBounding(draggable);
-const { x, y } = useDraggable(draggable, {
-  initialValue: { x: props.element.x, y: props.element.y}
+const { x, y, style } = useDraggable(element, {
+  initialValue: {
+    y: props.element.offsetTop + props.boundary.top,
+    x: props.element.offsetLeft + props.boundary.left
+  },
+  handle: handle
 });
 
-const { top, right, bottom, left } = props.boundary
-
-const restrictedX = computed(() =>
-  clamp(left.value, x.value, right.value - width.value)
-);
-const restrictedY = computed(() =>
-  clamp(top.value, y.value, bottom.value - height.value)
-);
-
+const setOffset = () => {
+  const offsetTop = y.value - props.boundary.top
+  const offsetLeft = x.value - props.boundary.left
+  store.setElementAxis(props.element.id, offsetTop, offsetLeft)
+}
 
 watchEffect(() => {
-  store.setElementAxis(props.element.id, x.value, y.value)
+  setOffset()
 })
+
+
 
 </script>
 
 <template>
   <div
-    ref="draggable"
-    :style="{
-      userSelect: 'none',
-      cursor: 'move',
-      position: 'fixed',
-      top: `${restrictedY}px`,
-      left: `${restrictedX}px`,
-    }">
+    ref="element"
+    :class="['element', { 'out-of-bound': outOfBound }]"
+    :style="style">
+    <div class='element-actions'>
+      <span class='element-actions-delete' @click="$emit('remove')">
+        <i class="ei-icon--trash" />
+      </span>
+      <span ref='handle' class='element-actions-handle'>
+        <i class='ei-icon--move' />
+      </span>
+    </div>
+
     <slot />
   </div>
 
 </template>
+
+<style scoped lang='scss'>
+.element {
+  position: fixed;
+  user-select: none;
+
+  &-actions {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    opacity: 0;
+    cursor: move;
+
+    span {
+      height: 24px;
+      width: 24px;
+      background: #111111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 1;
+
+      i {
+        color: var(--app-white)
+      }
+    }
+
+    &-delete {
+      cursor: pointer;
+      right: 24px !important;
+    }
+
+    &-handle {
+      cursor: move;
+    }
+  }
+
+  &:hover {
+    .element-actions {
+      opacity: 1;
+    }
+  }
+}
+
+
+</style>

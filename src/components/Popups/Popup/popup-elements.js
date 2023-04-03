@@ -1,7 +1,6 @@
 const heading = {
-  x: 20,
-  y: 20,
-  required: false,
+  offsetLeft: 20,
+  offsetTop: 20,
   type: ["text"],
   id: 'heading',
   name: 'Heading',
@@ -21,9 +20,8 @@ const heading = {
 }
 
 const text = {
-  x: 20,
-  y: 20,
-  required: false,
+  offsetLeft: 20,
+  offsetTop: 20,
   type: ["text"],
   id: 'text',
   name: 'Text',
@@ -43,9 +41,8 @@ const text = {
 }
 
 const input = {
-  x: 20,
-  y: 20,
-  required: false,
+  offsetLeft: 20,
+  offsetTop: 20,
   type: ["text", "container", "input"],
   id: 'input',
   name: 'Input',
@@ -72,9 +69,8 @@ const input = {
 }
 
 const button = {
-  x: 20,
-  y: 20,
-  required: false,
+  offsetLeft: 20,
+  offsetTop: 20,
   type: ["text", "container", "button"],
   id: 'button',
   name: 'Button',
@@ -97,9 +93,8 @@ const button = {
 }
 
 const image = {
-  x: 20,
-  y: 20,
-  required: false,
+  offsetLeft: 20,
+  offsetTop: 20,
   type: ["image"],
   id: 'image',
   name: 'Image',
@@ -125,35 +120,40 @@ const buttonId = button.id + '-' + suffix
 const imageId = image.id + '-' + suffix
 
 export const defaultPopupElements = {
-  [textId]: {
-    ...text,
-    id: textId,
-    value: "No credit card required. No Surprises.",
-    required: true
+  [imageId]: {
+    ...image,
+    id: imageId,
+    value: "../../popup-stars.svg",
+    offsetLeft: 170,
+    offsetTop: 60
   },
   [headingId]: {
     ...heading,
     id: headingId,
     value: "Get access to unlimited content from Ei-Popups.",
-    required: true
+    offsetLeft: 20,
+    offsetTop: 140
   },
   [inputId]: {
     ...input,
     id: inputId,
-    required: true
+    offsetLeft: 100,
+    offsetTop: 240
   },
   [buttonId]: {
     ...button,
     id: buttonId,
     value: "Signup Now",
-    required: true
+    offsetLeft: 170,
+    offsetTop: 300
   },
-  [imageId]: {
-    ...image,
-    id: imageId,
-    value: "../../popup-stars.svg",
-    required: true
-  }
+  [textId]: {
+    ...text,
+    id: textId,
+    value: "No credit card required. No Surprises.",
+    offsetLeft: 110,
+    offsetTop: 380
+  },
 }
 
 export const elements = {

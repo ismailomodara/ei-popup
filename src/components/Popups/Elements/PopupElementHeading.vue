@@ -62,6 +62,7 @@ h1 {
 	outline: none;
 	box-shadow: none;
 	border: none;
-  width: 100%;
+  max-width: 80%;
+  margin: auto;
 }
 </style>

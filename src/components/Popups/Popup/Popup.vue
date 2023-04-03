@@ -43,6 +43,7 @@ export default {
 
   &-window {
     width: calc(100% - 320px);
+    overflow: hidden;
   }
 }
 </style>

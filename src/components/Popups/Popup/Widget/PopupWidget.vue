@@ -1,30 +1,28 @@
 <template>
   <div
-    ref="popupWidget"
+    ref='popupWidget'
     :class="['popup-widget', { preview: preview }]"
     :style='{
-      backgroundColor: popup.settings.backgroundColor,
-      height: views[view],
-      maxHeight: views[view],
-      width: views[view],
-      maxWidth: views[view],
-    }'
+        backgroundColor: popup.settings.backgroundColor,
+        height: views[view],
+        maxHeight: views[view],
+        width: views[view],
+        maxWidth: views[view],
+      }'
     @click.self="editElement(null)"
   >
-    <template v-if='boundary'>
+    <template v-if='top'>
       <popup-element
         v-for="element in elements"
         :key='element.id'
         :element="element"
-        :boundary="boundary"
+        :boundary='popupWidgetBoundary'
+        @remove='removeElement(element.id)'
       >
         <div
           :class="['popup-widget-element', { focused: editing === element.id }]"
           @click="editElement(element.id)"
-          >
-          <span class='popup-widget-element-action' @click='removeElement(element.id)'>
-              <i class="ei-icon--trash" />
-            </span>
+        >
           <component
             :is="components[element.component]"
             :editing="editing === element.id"
@@ -38,14 +36,14 @@
       </popup-element>
     </template>
   </div>
-
 </template>
 <script setup>
-import { useElementBounding } from '@vueuse/core';
 import { ref, computed } from "vue";
 import { useAppStore } from "@/store";
+import { useElementBounding } from '@vueuse/core'
 
-defineProps(['view', 'preview']);
+const props = defineProps(['view', 'preview']);
+
 
 import PopupElement from '@/components/Popups/Elements/PopupElement.vue';
 import PopupElementText from '@/components/Popups/Elements/PopupElementText.vue';
@@ -62,9 +60,16 @@ const components = {
   "popup-element-image": PopupElementImage,
 }
 
-const popupWidget = ref();
-const { top, right, bottom, left } = useElementBounding(popupWidget);
-const boundary = { top, right, bottom, left }
+const popupWidget = ref(null)
+const { top, left } = useElementBounding(popupWidget);
+
+const popupWidgetBoundary = computed(() => {
+  return {
+    top: props.preview ? 0 : top.value,
+    left: props.preview ? 0 : left.value,
+  }
+})
+
 const views = ref({
   desktop: "500px",
   tablet: "400px",
@@ -100,7 +105,6 @@ const removeElement = (elementId) => {
   max-height: 500px;
   background-color: #e85e5b;
   border-radius: 100%;
-  position: relative;
   padding: 30px;
 
   &:before {
