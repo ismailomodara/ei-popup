@@ -1,15 +1,16 @@
 <script setup>
 import { ref, watchEffect } from 'vue';
-import { useDraggable } from '@vueuse/core';
+import { useDraggable, useElementBounding } from '@vueuse/core'
 import { useAppStore } from '@/store'
 
-const props = defineProps(['element', 'boundary'])
+const store = useAppStore()
+const props = defineProps(['element', 'boundary', 'preview'])
 
 const element = ref();
 const handle = ref();
 const outOfBound = ref(false);
-const store = useAppStore()
 
+const { width, height } = useElementBounding((element));
 const { x, y, style } = useDraggable(element, {
   initialValue: {
     y: props.element.offsetTop + props.boundary.top,
@@ -21,6 +22,9 @@ const { x, y, style } = useDraggable(element, {
 const setOffset = () => {
   const offsetTop = y.value - props.boundary.top
   const offsetLeft = x.value - props.boundary.left
+
+  outOfBound.value = offsetTop < 0 || offsetTop > (500 - height.value) || offsetLeft < 0 || offsetLeft > (500 - width.value);
+
   store.setElementAxis(props.element.id, offsetTop, offsetLeft)
 }
 
@@ -35,7 +39,7 @@ watchEffect(() => {
 <template>
   <div
     ref="element"
-    :class="['element', { 'out-of-bound': outOfBound }]"
+    :class="['element', { 'out-of-bound': outOfBound, preview: preview }]"
     :style="style">
     <div class='element-actions'>
       <span class='element-actions-delete' @click="$emit('remove')">
@@ -55,6 +59,12 @@ watchEffect(() => {
 .element {
   position: fixed;
   user-select: none;
+
+  &.out-of-bound {
+    &.preview {
+      display: none;
+    }
+  }
 
   &-actions {
     display: flex;

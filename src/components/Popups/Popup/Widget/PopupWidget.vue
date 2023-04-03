@@ -15,6 +15,7 @@
         :key='element.id'
         :element="element"
         :boundary='popupWidgetBoundary'
+        :preview='preview'
         @remove='removeElement(element.id)'
       >
         <div
