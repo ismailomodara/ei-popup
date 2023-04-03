@@ -105,6 +105,12 @@ watchEffect(() => {
       opacity: 1;
     }
   }
+
+  &.preview {
+    .element-actions {
+      opacity: 0;
+    }
+  }
 }
 
 

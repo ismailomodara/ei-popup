@@ -39,6 +39,7 @@ export default {
     padding: 30px;
     overflow: hidden;
     overflow-y: scroll;
+    z-index: 9;
   }
 
   &-window {

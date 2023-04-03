@@ -19,14 +19,15 @@
         @remove='removeElement(element.id)'
       >
         <div
-          :class="['popup-widget-element', { focused: editing === element.id }]"
-          @click="editElement(element.id)"
+          :class="['popup-widget-element', { focused: editing === element.id, preview: preview }]"
+          @click="!preview ? editElement(element.id) : ''"
         >
           <component
             :is="components[element.component]"
             :editing="editing === element.id"
             :value="element.value"
             :settings='element.settings'
+            :preview='preview'
             :key="element.id"
             @update="element.value = $event"
 
@@ -159,11 +160,13 @@ const removeElement = (elementId) => {
         opacity: 1 !important;
       }
     }
+
+    &.preview {
+      border-color: transparent !important;
+    }
   }
 
   &.preview {
-    pointer-events: none;
-
     .popup-widget-element:hover,
     .popup-widget-element.focused, {
       border-color: transparent;

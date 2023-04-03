@@ -86,6 +86,8 @@ export default defineComponent({
     width: var(--sidenav-width);
     height: 100%;
     position: relative;
+    z-index: 9;
+    background-color: var(--app-white);
 
     &__logo {
       height: var(--tab-height);
@@ -94,6 +96,8 @@ export default defineComponent({
       display: grid;
       justify-content: center;
       align-content: center;
+      z-index: 9;
+      background-color: var(--app-white);
     }
 
     &__menu {
@@ -101,6 +105,9 @@ export default defineComponent({
 			padding: 15px;
       display: grid;
       grid-template-columns: 1fr;
+      z-index: 9;
+      z-index: 9;
+      background-color: var(--app-white);
 
       li {
         padding: 12px 15px;
@@ -166,6 +173,7 @@ export default defineComponent({
       display: grid;
       align-content: center;
       padding: 0 40px;
+      z-index: 9;
 
       > * {
         color: var(--app-primary);

@@ -3,6 +3,8 @@
 		ref="button"
 		:contenteditable="editing"
     :style="styles"
+    type='submit'
+    @click='allowSubmit'
 		@keydown.prevent.space="allowSpace"
 	>{{ value }}</button>
 </template>
@@ -14,6 +16,10 @@ export default defineComponent({
 	name: "PopupElementButton",
 	props: {
 		editing: {
+			type: Boolean,
+			default: false
+		},
+		preview: {
 			type: Boolean,
 			default: false
 		},
@@ -48,6 +54,7 @@ export default defineComponent({
         fontSize: fontSize + "px",
         paddingTop: padding + "px",
         paddingBottom: padding + "px",
+        cursor: this.preview ? 'pointer' : 'default'
       }
     }
 	},
@@ -61,7 +68,12 @@ export default defineComponent({
 	methods: {
 		allowSpace() {
 			document.execCommand("insertText", false, ' ')
-		}
+		},
+    allowSubmit() {
+      if (this.preview) {
+        this.$message.success("Button clicked!")
+      }
+    }
 	}
 })
 </script>
@@ -79,5 +91,6 @@ button {
   background-color: #111111;
   color: #ffffff;
   text-transform: uppercase;
+  cursor: pointer;
 }
 </style>
