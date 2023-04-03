@@ -5,21 +5,9 @@
     <div class='popup-design-widget'>
       <popup-widget ref="widget" :view="view" />
     </div>
-    <div class="popup-design-footer">
-      <div class="popup-design-footer-mode">
-        <el-radio-group v-model="view" size="large">
-          <el-radio-button label="desktop">
-            <span><i class="ei-icon--monitor" /></span>
-          </el-radio-button>
-          <el-radio-button label="tablet">
-            <span><i class="ei-icon--tablet" /></span>
-          </el-radio-button>
-          <el-radio-button label="mobile">
-            <span><i class="ei-icon--smartphone" /></span>
-          </el-radio-button>
-        </el-radio-group>
-      </div>
-      <div class="popup-design-footer-action">
+    <div class="popup-design-actions">
+      <h4>Preview or save your widget</h4>
+      <div>
         <el-button @click="preview = true">Preview</el-button>
         <el-button type="primary" :loading='saving' @click="save">Save</el-button>
       </div>
@@ -89,17 +77,24 @@ export default {
 
   &-widget {
     min-height: 500px;
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
   }
 
-
-  &-footer {
+  &-actions {
     background-color: var(--app-white);
     margin: 50px auto 100px;
-    width: 70%;
+    width: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 30px 60px;
+
+    > h4 {
+      margin-right: 50px;
+    }
   }
 }
 </style>

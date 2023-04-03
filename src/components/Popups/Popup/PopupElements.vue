@@ -19,8 +19,8 @@
 	</div>
 </template>
 <script>
-import { elements } from '@/components/Popups/Popup/popup-elements'
 import AppSectionHeading from '@/components/App/AppSectionHeading.vue'
+import { elements } from '@/components/Popups/Popup/popup-elements'
 import { useAppStore } from '@/store'
 
 export default {

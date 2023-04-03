@@ -45,6 +45,7 @@ export default {
   box-shadow: none;
   outline: none;
   backdrop-filter: blur(4px);
+  overflow: hidden;
 
   .el-dialog__header {
      text-align: right;

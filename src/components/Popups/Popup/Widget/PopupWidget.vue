@@ -2,13 +2,11 @@
   <div
     ref='popupWidget'
     :class="['popup-widget', { preview: preview }]"
-    :style='{
-        backgroundColor: popup.settings.backgroundColor,
-        height: views[view],
-        maxHeight: views[view],
-        width: views[view],
-        maxWidth: views[view],
-      }'
+    :style="{
+        position: preview ? 'relative': 'fixed',
+        left: preview ? 0 : '50%',
+        backgroundColor: popup.settings.backgroundColor
+    }"
     @click.self="editElement(null)"
   >
     <template v-if='top'>
@@ -42,7 +40,7 @@ import { ref, computed } from "vue";
 import { useAppStore } from "@/store";
 import { useElementBounding } from '@vueuse/core'
 
-const props = defineProps(['view', 'preview']);
+const props = defineProps(['preview']);
 
 
 import PopupElement from '@/components/Popups/Elements/PopupElement.vue';
@@ -68,12 +66,6 @@ const popupWidgetBoundary = computed(() => {
     top: props.preview ? 0 : top.value,
     left: props.preview ? 0 : left.value,
   }
-})
-
-const views = ref({
-  desktop: "500px",
-  tablet: "400px",
-  mobile: "380px"
 })
 
 const store = useAppStore();
@@ -106,6 +98,7 @@ const removeElement = (elementId) => {
   background-color: #e85e5b;
   border-radius: 100%;
   padding: 30px;
+  left: 50%;
 
   &:before {
     content: "";
@@ -193,10 +186,7 @@ const removeElement = (elementId) => {
 
 @media (screen and max-width: 600px) {
   .popup-widget {
-    height: 380px !important;
-    width: 380px !important;
-    max-height: 380px !important;
-    max-width: 380px !important;
+    transform: scale(0.7);
   }
 }
 </style>
